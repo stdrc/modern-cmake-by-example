@@ -1,19 +1,13 @@
-# 指定最小 CMake 版本要求
 cmake_minimum_required(VERSION 3.9)
-# 设置项目名称
 project(answer)
 
-#[[
-添加可执行文件 target，类似于原来 Makefile 的：
+# 添加 libanswer 库目标，STATIC 指定为静态库
+add_library(libanswer STATIC answer.cpp)
 
-    answer: main.o answer.o
-    main.o: main.cpp answer.hpp
-    answer.o: answer.cpp answer.hpp
+add_executable(answer main.cpp)
 
-CMake 会自动找到依赖的头文件，因此不需要特别指定，
-当头文件修改的时候，会重新编译依赖它的目标文件。
-#]]
-add_executable(answer main.cpp answer.cpp)
+# 为 answer 可执行目标链接 libanswer
+target_link_libraries(answer libanswer)
 
 #[[
 使用如下命令构建本项目：
