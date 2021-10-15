@@ -8,7 +8,7 @@ int main(int argc, const char *argv[]) {
         std::string answer;
         std::cin >> answer;
         auto expected_answer = answer::find_the_ultimate_answer();
-        if (answer == expected_answer) {
+        if (answer::check_the_answer(answer, expected_answer)) {
             std::cout << "Correct!" << std::endl;
             break;
         }
