@@ -1,7 +1,9 @@
 cmake_minimum_required(VERSION 3.9)
 project(answer)
 
-# 添加 answer 子目录
+# 设置项目使用的 C++ 版本
+set(CMAKE_CXX_STANDARD 11)
+
 add_subdirectory(answer)
 
 add_executable(answer_app main.cpp)
