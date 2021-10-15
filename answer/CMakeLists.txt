@@ -1,9 +1,3 @@
-#[[
-创建一个可配置的变量，可以由上级 CMakeLists 或 cmake 命令指定变量值。
-
-这里由于 APPID 是一个应该藏好、不应该放在代码里的值，所以建议在 cmake
-命令中通过 -D 参数传入。
-#]]
 set(WOLFRAM_APPID
     ""
     CACHE STRING "WolframAlpha APPID")
@@ -12,13 +6,19 @@ if(WOLFRAM_APPID STREQUAL "")
     message(SEND_ERROR "WOLFRAM_APPID must not be empty")
 endif()
 
-add_library(libanswer STATIC answer.cpp)
-target_include_directories(libanswer PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
-
 #[[
-将 WOLFRAM_APPID 添加到编译 .cpp 文件时的 definition 列表，从而
-可在 C++ 代码中使用。
-#]]
-target_compile_definitions(libanswer PRIVATE WOLFRAM_APPID="${WOLFRAM_APPID}")
+INTERFACE 类型的 target 一般用于没有源文件的情况，比如
+header-only 库，或者只是为了抽象地提供一组 target_xxx
+的配置。
 
-target_link_libraries(libanswer PRIVATE wolfram)
+INTERFACE target 的后续所有 target_xxx 都必须也使用
+INTERFACE，效果将会直接应用到链接此库的 target 上。
+
+本步骤将 libanswer 从 STATIC target 改成 INTERFACE
+target 不会影响 answer_app 中使用它的代码。
+#]]
+add_library(libanswer INTERFACE)
+target_include_directories(libanswer
+                           INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_compile_definitions(libanswer INTERFACE WOLFRAM_APPID="${WOLFRAM_APPID}")
+target_link_libraries(libanswer INTERFACE wolfram)
