@@ -16,9 +16,6 @@ namespace answer {
             return wolfram::simple_query(WOLFRAM_APPID, "what is the ultimate answer?");
         }
 
-        // 下面是非常 fancy 的两个函数，使用了 C++14 的 auto 返回类型、
-        // C++17 的 if constexpr 和 C++20 的 constraints。
-
         namespace impl {
             template <typename T>
             auto to_string(T &&t) {
