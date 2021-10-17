@@ -13,7 +13,6 @@ target_compile_definitions(libanswer INTERFACE WOLFRAM_APPID="${WOLFRAM_APPID}")
 target_compile_features(libanswer INTERFACE cxx_std_20)
 target_link_libraries(libanswer INTERFACE wolfram)
 
-# 只在启用了 BUILD_TESTING 的情况下构建测试程序
 if(BUILD_TESTING)
     add_subdirectory(tests)
 endif()
