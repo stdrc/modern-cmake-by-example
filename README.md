@@ -179,6 +179,10 @@ target_include_directories(curl_wrapper
 target_link_libraries(curl_wrapper PRIVATE CURL::libcurl)
 ```
 
+搞清楚项目各模块间的依赖关系很重要：
+
+![](assets/dependency-graph.svg)
+
 ### [`9_cache_string`](../../tree/9_cache_string)
 
 #### Cache 变量
