@@ -12,6 +12,7 @@ namespace answer {
     namespace v2 {
         std::string find_the_ultimate_answer() {
             // 使用 CURL 调用 WolframAlpha API 获得答案
+            // 注：这里的 appid 是演示用的，只有免费的 2000 次/天调用额度，如有实际需要请自行申请
             const auto url = "https://api.wolframalpha.com/v1/result?appid=YAPKJY-8XT9VEYPX9&i=what+is+ultimate+answer";
             const auto curl = curl_easy_init();
             curl_easy_setopt(curl, CURLOPT_URL, url);
