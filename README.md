@@ -25,7 +25,7 @@ $ make hello
 $ ./hello
 ```
 
-### `1_helloworld`
+### [`1_helloworld`](../../tree/1_helloworld)
 
 变量赋值：
 
@@ -46,7 +46,7 @@ main.o: main.cpp
 	$(CXX) -c main.cpp
 ```
 
-### `2_ask_for_answer`
+### [`2_ask_for_answer`](../../tree/2_ask_for_answer)
 
 Make 可以自动推断 `.o` 文件需要用什么命令从什么文件编译：
 
@@ -60,7 +60,7 @@ main.o: answer.hpp
 answer.o: answer.hpp
 ```
 
-### `4_switch_to_cmake`
+### [`4_switch_to_cmake`](../../tree/4_switch_to_cmake)
 
 `CMakeLists.txt` 基本格式：
 
@@ -79,7 +79,7 @@ cmake --build build # 执行构建
 ./build/answer      # 运行 answer 程序
 ```
 
-### `5_split_library`
+### [`5_split_library`](../../tree/5_split_library)
 
 项目中可以复用的部分可以拆成 library：
 
@@ -96,7 +96,7 @@ add_executable(answer main.cpp)
 target_link_libraries(answer libanswer)
 ```
 
-### `6_subdirectory`
+### [`6_subdirectory`](../../tree/6_subdirectory)
 
 功能独立的模块可以放到单独的子目录：
 
@@ -130,7 +130,7 @@ target_include_directories(libanswer PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 `target_include_directories` 的 `PUBLIC` 参数表示这个包含目录是 `libanswer` 的公开接口一部分，链接 `libanswer` 的 target 可以 `#include` 该目录中的文件。
 
-### `7_use_libcurl`
+### [`7_use_libcurl`](../../tree/7_use_libcurl)
 
 系统中安装的第三方库可以通过 `find_package` 找到，像之前的 `libanswer` 一样链接：
 
@@ -145,7 +145,7 @@ target_link_libraries(libanswer PRIVATE CURL::libcurl)
 
 `CURL` 和 `CURL::libcurl` 是约定的名字，其它第三方库的包名和 library 名可在网上查。
 
-### `8_link_libs_in_same_root`
+### [`8_link_libs_in_same_root`](../../tree/8_link_libs_in_same_root)
 
 可以链接同一项目中其它子目录中定义的 library：
 
@@ -179,7 +179,7 @@ target_include_directories(curl_wrapper
 target_link_libraries(curl_wrapper PRIVATE CURL::libcurl)
 ```
 
-### `9_cache_string`
+### [`9_cache_string`](../../tree/9_cache_string)
 
 #### Cache 变量
 
@@ -218,7 +218,7 @@ target_compile_definitions(libanswer PRIVATE WOLFRAM_APPID="${WOLFRAM_APPID}")
 
 这会给 C++ 代码提供一个 `WOLFRAM_APPID` 宏。
 
-### `10_interface_library`
+### [`10_interface_library`](../../tree/10_interface_library)
 
 Header-only 的库可以添加为 `INTERFACE` 类型的 library：
 
@@ -231,7 +231,7 @@ target_link_libraries(libanswer INTERFACE wolfram)
 
 通过 `target_xxx` 给 `INTERFACE` library 添加属性都要用 `INTERFACE`。
 
-### `11_target_compile_features`
+### [`11_target_compile_features`](../../tree/11_target_compile_features)
 
 可以针对 target 要求编译 feature（即指定要使用 C/C++ 的什么特性）：
 
@@ -244,7 +244,7 @@ target_compile_features(libanswer INTERFACE cxx_std_20)
 1. `CMAKE_CXX_STANDARD` 会应用于所有能看到这个变量的 target，而 `target_compile_features` 只应用于单个 target
 2. `target_compile_features` 可以指定更细粒度的 C++ 特性，例如 `cxx_auto_type`、`cxx_lambda` 等。
 
-### `12_testing`
+### [`12_testing`](../../tree/12_testing)
 
 #### CTest
 
@@ -326,7 +326,7 @@ answer_add_test(test_another_function test_another_function.cpp)
 
 宏和函数的区别与 C/C++ 中的宏和函数的区别相似。
 
-### `13_back_to_makefile`
+### [`13_back_to_makefile`](../../tree/13_back_to_makefile)
 
 调用 CMake 命令往往需要传很多参数，并且 CMake 生成、CMake 构建、CTest 的命令都不太相同，要获得比较统一的使用体验，可以在外面包一层 Make：
 
