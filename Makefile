@@ -1,2 +1,3 @@
 hello: main.cpp
-	clang++ -o hello main.cpp
+	$(CXX) -o hello main.cpp
+	echo "OK"
