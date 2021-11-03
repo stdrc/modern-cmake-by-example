@@ -15,7 +15,8 @@ name: dependencies
 
 ```makefile
 hello: main.cpp
-	clang++ -o hello main.cpp
+	$(CXX) -o hello main.cpp # CXX 是 Make 的内置变量
+	echo "OK"
 ```
 
 构建 & 运行命令：
