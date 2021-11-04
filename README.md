@@ -381,6 +381,71 @@ $ make modules_install # 安装内核模块
 $ make install # 安装内核
 ```
 
+## 直播时的 Q&A
+
+由于直播时候录屏里没有录到腾讯会议的聊天记录窗口，导致看回放时看不到原问题，这里列出一下。
+
+### CMake 是怎么找到 `.cpp` 文件依赖的头文件的？
+
+它没有自己去找 `.cpp` 文件的依赖，而是在生成的 `Makefile` 里面，使用 GCC 等编译器的 `-M` 参数生成 `.d` 依赖文件，这个在其它使用 Make 管理构建的项目里应该也是常见用法。
+
+### 模块依赖图是人工画的还是自动生成的？
+
+是人工画的，用的是 VSCode 插件 [Draw.io Integration](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio)。
+
+### 在 `CMakeLists.txt` 里定义变量并检查要求不为空，会导致 VSCode 乱报错吗？
+
+VSCode 装了 [CMake Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools) 插件的情况下，修改 `CMakeLists.txt` 后它会自动执行 CMake Configure，如果有要求非空的 cache 变量，它会报错，这时候直接去修改 `build/CMakeCache.txt`，给对应 cache 变量赋值即可。
+
+也可以手动运行一次 `cmake` 命令，用 `-D` 参数传入变量，此后只要不删除 `build/CMakeCache.txt`，就不会再报错。
+
+### FetchContent 每次编译都要重新编译一遍依赖库吗？
+
+不会，`cmake --build build` 是会增量编译的。另外只要不删除 `build/_deps`，即使删了 `build/CMakeCache.txt`，之后重新 configure 也不会重新下载依赖。
+
+### 能来个 VSCode 插件推荐列表吗？
+
+我自己在用的：
+
+<details>
+
+<summary>点击展开</summary>
+
+- Better C++ Syntax
+- Bookmarks
+- C/C++
+- C/C++ GNU Global（适合阅读修改 Linux 内核用）
+- CMake
+- CMake Tools
+- cmake-format
+- Code Runner
+- crates
+- Diff
+- Draw.io Integration
+- Error Lens
+- Even Better TOML
+- GitHub Copilot
+- GitLens
+- Hex Editor
+- hexdump for VSCode
+- Include Autocomplete
+- LaTeX Workshop
+- Live Preview
+- Markdown All in One
+- Markdown Preview Enhanced
+- Marp for VS Code
+- Rainbow CSV
+- Remote - SSH
+- Run on Save
+- rust-analyzer
+- SVG Viewer
+- Tabnine
+- Task Explorer
+- Todo Tree
+- WakaTime
+
+</details>
+
 ## 扩展阅读
 
 ### Makefile
