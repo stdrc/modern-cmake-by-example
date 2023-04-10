@@ -5,4 +5,4 @@ target_include_directories(curl_wrapper
                            PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 # curl_wrapper PRIVATE 地依赖 CURL::libcurl
-target_link_libraries(curl_wrapper PRIVATE CURL::libcurl)
+target_link_libraries(curl_wrapper PRIVATE ${CURL_LIBRARY})
